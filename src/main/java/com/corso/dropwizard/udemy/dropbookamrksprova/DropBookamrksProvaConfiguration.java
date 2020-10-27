@@ -26,11 +26,11 @@ public class DropBookamrksProvaConfiguration extends Configuration {
 	
 	@NotNull
 	@Valid
-	private DataSourceFactory database = new DataSourceFactory();
+	private DataSourceFactory dataSourceFactory = new DataSourceFactory();
 	
 	@JsonProperty("database")
     public DataSourceFactory getDataSourceFactory() {
-        return database;
+        return dataSourceFactory;
     }
     
 	@NotEmpty

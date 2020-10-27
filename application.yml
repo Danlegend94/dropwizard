@@ -4,8 +4,7 @@ server:
     applicationConnectors:
         - type: http
           port: 8085
-        
-database: 
+database:
     driverClass: com.postgresql.jdbc.driver
     user: postgres
     password: agile
