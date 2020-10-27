@@ -1,5 +1,7 @@
 package com.corso.dropwizard.udemy.dropbookamrksprova;
 
+import com.corso.dropwizard.udemy.dropbookamrksprova.resources.HelloResources;
+
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
@@ -23,7 +25,7 @@ public class DropBookamrksProvaApplication extends Application<DropBookamrksProv
     @Override
     public void run(final DropBookamrksProvaConfiguration configuration,
                     final Environment environment) {
-        // TODO: implement application
+    	environment.jersey().register(new HelloResources()); //permette l'accesso al metodo HelloResources tramite chiamata http
     }
 
 }
