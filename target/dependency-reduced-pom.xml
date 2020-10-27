@@ -105,6 +105,18 @@
           </reportPlugins>
         </configuration>
       </plugin>
+      <plugin>
+        <groupId>org.liquibase</groupId>
+        <artifactId>liquibase-maven-plugin</artifactId>
+        <version>3.4.1</version>
+        <configuration>
+          <changeLogFile>migrations.xml</changeLogFile>
+          <driver>org.postgresql.Driver</driver>
+          <url>jdbc:postgresql://localhost:5432/dropBookmarks</url>
+          <username>postgres</username>
+          <password>agile</password>
+        </configuration>
+      </plugin>
     </plugins>
   </build>
   <dependencies>
