@@ -1,8 +1,14 @@
 package com.corso.dropwizard.udemy.dropbookamrksprova;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+
 import org.hibernate.validator.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import io.dropwizard.Configuration;
+import io.dropwizard.db.DataSourceFactory;
 
 public class DropBookamrksProvaConfiguration extends Configuration {
 	
@@ -15,8 +21,17 @@ public class DropBookamrksProvaConfiguration extends Configuration {
 	 * Una volta fatto ciò all'interno di DropBookmarksApplication l' oggetto configuration
 	 * conterrà il valore di password
 	 * 
-	 * 
+	 * In questa classe viene inoltre creata la connessione al dataBase. I dati vengono prelevati dal file yml sotto la voce database
 	 */
+	
+	@NotNull
+	@Valid
+	private DataSourceFactory database = new DataSourceFactory();
+	
+	@JsonProperty("database")
+    public DataSourceFactory getDataSourceFactory() {
+        return database;
+    }
     
 	@NotEmpty
 	private String password;
@@ -25,4 +40,6 @@ public class DropBookamrksProvaConfiguration extends Configuration {
 	public String getPassword() {
 		return password;
 	}
+	
+	
 }
