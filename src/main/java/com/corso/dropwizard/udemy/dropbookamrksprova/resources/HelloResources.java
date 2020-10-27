@@ -8,6 +8,7 @@ import javax.ws.rs.core.MediaType;
 import com.corso.dropwizard.udemy.dropbookamrksprova.core.User;
 
 import io.dropwizard.auth.Auth;
+import io.dropwizard.hibernate.UnitOfWork;
 
 @Path("/hello") //utilizzato come request mapping
 public class HelloResources {
@@ -28,6 +29,7 @@ public class HelloResources {
 	@GET
 	@Produces(MediaType.TEXT_PLAIN)
 	@Path("security")
+	@UnitOfWork //TODO VEDERE QUESTA ANNOTATION
 	public String greetSecurity(@Auth User user) {
 		return "Hello world security";
 	}

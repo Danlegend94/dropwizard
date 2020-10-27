@@ -1,6 +1,7 @@
 package com.corso.dropwizard.udemy.dropbookamrksprova.auth;
 
 import com.corso.dropwizard.udemy.dropbookamrksprova.core.User;
+import com.corso.dropwizard.udemy.dropbookamrksprova.db.UserDao;
 import com.google.common.base.Optional;
 
 import io.dropwizard.auth.AuthenticationException;
@@ -23,21 +24,28 @@ public class HelloAuthentication implements Authenticator<BasicCredentials, User
 	 * il metodo Optional<User> authenticate(BasicCredentials credentials) diventerebbe 
 	 * Optional<Animale> authenticate(BasicCredentials credentials)
 	 */
-	private String password;
+	
+	private UserDao userDao;
 	
 	public HelloAuthentication() {}
 	
-	public HelloAuthentication(String password) {
-		this.password = password;
+	public HelloAuthentication(UserDao userDao) {
+		this.userDao = userDao;
 	}
 	
 	@Override
 	public Optional<User> authenticate(BasicCredentials credentials) throws AuthenticationException {
-		if(password.equals(credentials.getPassword())) {
-			return Optional.of((new User()));
-		}
-		
-		return Optional.absent();
+		return userDao.findByUsernameAndPassword(credentials.getUsername(), credentials.getPassword());
 	}
+	
+	//private String password;
+	/*
+	 * @Override public Optional<User> authenticate(BasicCredentials credentials)
+	 * throws AuthenticationException {
+	 * if(password.equals(credentials.getPassword())) { return Optional.of((new
+	 * User())); }
+	 * 
+	 * return Optional.absent(); }
+	 */
 
 }
