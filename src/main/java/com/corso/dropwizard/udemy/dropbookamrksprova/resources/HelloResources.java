@@ -5,6 +5,10 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import com.corso.dropwizard.udemy.dropbookamrksprova.core.User;
+
+import io.dropwizard.auth.Auth;
+
 @Path("/hello") //utilizzato come request mapping
 public class HelloResources {
 	
@@ -19,6 +23,13 @@ public class HelloResources {
 	@Produces(MediaType.TEXT_PLAIN) //indica cosa il metodo sta producendo come risposta
 	public String greet() {
 		return "Hello world";
+	}
+	
+	@GET
+	@Produces(MediaType.TEXT_PLAIN)
+	@Path("security")
+	public String greetSecurity(@Auth User user) {
+		return "Hello world security";
 	}
 
 }

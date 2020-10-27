@@ -1,8 +1,14 @@
 package com.corso.dropwizard.udemy.dropbookamrksprova;
 
+import org.eclipse.jetty.security.authentication.BasicAuthenticator;
+
+import com.corso.dropwizard.udemy.dropbookamrksprova.auth.HelloAuthentication;
+import com.corso.dropwizard.udemy.dropbookamrksprova.core.User;
 import com.corso.dropwizard.udemy.dropbookamrksprova.resources.HelloResources;
 
 import io.dropwizard.Application;
+import io.dropwizard.auth.AuthFactory;
+import io.dropwizard.auth.basic.BasicAuthFactory;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 
@@ -26,6 +32,7 @@ public class DropBookamrksProvaApplication extends Application<DropBookamrksProv
     public void run(final DropBookamrksProvaConfiguration configuration,
                     final Environment environment) {
     	environment.jersey().register(new HelloResources()); //permette l'accesso al metodo HelloResources tramite chiamata http
+    	environment.jersey().register(AuthFactory.binder(new BasicAuthFactory<>(new HelloAuthentication(), "SECURITY", User.class)));
     }
 
 }
