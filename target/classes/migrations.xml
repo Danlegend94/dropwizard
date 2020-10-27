@@ -18,4 +18,23 @@
             </column>
         </createTable>
     </changeSet>
+    <changeSet id="4" author="daniele" context="DEV">
+        <insert tableName="users">
+            <column name="id" value="1"/>
+            <column name="username" value="admin"/>
+            <column name="password" value="admin"/>
+        </insert>
+        <insert tableName="users">
+            <column name="id" value="2"/>
+            <column name="username" value="admin2"/>
+            <column name="password" value="admin2"/>
+        </insert>
+        <rollback>
+            <delete tableName="users">
+                <where>
+                    id in (1, 2)
+                </where>
+            </delete>
+        </rollback>
+    </changeSet>
 </databaseChangeLog>
