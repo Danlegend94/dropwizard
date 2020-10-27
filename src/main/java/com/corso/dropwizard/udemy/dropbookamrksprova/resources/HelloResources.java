@@ -18,7 +18,7 @@ public class HelloResources {
 	@GET
 	@Produces(MediaType.TEXT_PLAIN) //indica cosa il metodo sta producendo come risposta
 	public String greet() {
-		return "hello world";
+		return "Hello world";
 	}
 
 }
