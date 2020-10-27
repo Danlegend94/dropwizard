@@ -15,6 +15,11 @@ public class HelloAuthentication implements Authenticator<BasicCredentials, User
 	 * 
 	 * Optional.absent() restituisce un 401 Unauthorized con messaggio 
 	 * Credentials are required to access this resource
+	 * 
+	 * il metodo authenticate viene costruito in base ai parametri passati ad 
+	 * Authenticator<BasicCredentials, User>. Quindi se per esempio creassi una classe Animale
+	 * il metodo Optional<User> authenticate(BasicCredentials credentials) diventerebbe 
+	 * Optional<Animale> authenticate(BasicCredentials credentials)
 	 */
 	@Override
 	public Optional<User> authenticate(BasicCredentials credentials) throws AuthenticationException {
