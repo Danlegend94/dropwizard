@@ -1,0 +1,12 @@
+password: password
+
+#server:
+  #applicationConnsectors:
+      #- type: http
+        #port: 8085
+        
+#database: 
+    #driverClass: com.postgresql.jdbc.driver
+    #user: postgres
+    #password: agile
+    #url: spring.datasource.url=jdbc:postgresql://localhost:5432/dropBookmarks

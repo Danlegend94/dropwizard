@@ -149,14 +149,6 @@
       <scope>test</scope>
       <exclusions>
         <exclusion>
-          <artifactId>junit</artifactId>
-          <groupId>junit</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>javax.servlet</artifactId>
-          <groupId>javax.servlet</groupId>
-        </exclusion>
-        <exclusion>
           <artifactId>jersey-test-framework-core</artifactId>
           <groupId>org.glassfish.jersey.test-framework</groupId>
         </exclusion>
@@ -171,6 +163,10 @@
         <exclusion>
           <artifactId>asm-debug-all</artifactId>
           <groupId>org.ow2.asm</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>junit</artifactId>
+          <groupId>junit</groupId>
         </exclusion>
       </exclusions>
     </dependency>
