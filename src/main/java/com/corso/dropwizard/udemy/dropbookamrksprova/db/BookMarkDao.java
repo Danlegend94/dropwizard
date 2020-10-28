@@ -50,7 +50,7 @@ public class BookMarkDao extends AbstractDAO<Bookmark>{
 	
 	public void delete(LongParam id) {
 		namedQuery("Bookmark.remove")
-        .setParameter("id", id)
+        .setParameter("id", id.get())
         .executeUpdate();
 	}
 
