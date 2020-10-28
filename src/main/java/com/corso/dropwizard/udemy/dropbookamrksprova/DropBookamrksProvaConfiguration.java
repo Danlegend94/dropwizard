@@ -26,6 +26,11 @@ public class DropBookamrksProvaConfiguration extends Configuration {
 	private DataSourceFactory dataSourceFactory = new DataSourceFactory();
 	
 	@JsonProperty("database")
+	public void setDataSourceFactory(DataSourceFactory dataSourceFactory) {
+		this.dataSourceFactory = dataSourceFactory;
+	}
+
+	@JsonProperty("database")
     public DataSourceFactory getDataSourceFactory() {
         return dataSourceFactory;
     }
