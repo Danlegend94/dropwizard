@@ -1,9 +1,9 @@
 package com.corso.dropwizard.udemy.dropbookamrksprova;
 
-import com.corso.dropwizard.udemy.dropbookamrksprova.auth.HelloAuthentication;
+import com.corso.dropwizard.udemy.dropbookamrksprova.auth.UserAuthentication;
 import com.corso.dropwizard.udemy.dropbookamrksprova.core.User;
 import com.corso.dropwizard.udemy.dropbookamrksprova.db.UserDao;
-import com.corso.dropwizard.udemy.dropbookamrksprova.resources.HelloResources;
+import com.corso.dropwizard.udemy.dropbookamrksprova.resources.UserResources;
 import io.dropwizard.Application;
 import io.dropwizard.auth.AuthFactory;
 import io.dropwizard.auth.basic.BasicAuthFactory;
@@ -13,10 +13,8 @@ import io.dropwizard.migrations.MigrationsBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 
-//TODO RIVEDI LEZIONE 50
 public class DropBookamrksProvaApplication extends Application<DropBookamrksProvaConfiguration> {
 	
-	//TODO rivedi questa parte
 	final HibernateBundle<DropBookamrksProvaConfiguration> hibernateBundle = 
 			new HibernateBundle<DropBookamrksProvaConfiguration>(User.class) {
 
@@ -35,6 +33,8 @@ public class DropBookamrksProvaApplication extends Application<DropBookamrksProv
         return "DropBookamrksProva";
     }
 
+    
+    /*Metodo dove avviene l'inizializzazione degli elementi del progetto.*/
     @Override
     public void initialize(final Bootstrap<DropBookamrksProvaConfiguration> bootstrap) {
         bootstrap.addBundle(hibernateBundle);
@@ -47,15 +47,18 @@ public class DropBookamrksProvaApplication extends Application<DropBookamrksProv
             }
         });
     }
-
+    
+    /*Environment è un oggetto che contiene tutte le risorse, le servlet, i filtri e i controlli di integrità,
+     *provider Jersey, gli oggetti gestiti , le attività e le proprietà Jersey forniti dall'applicazione
+     * 
+     * All'interno del metodo run tutte le istanze
+     */
     @Override
     public void run(final DropBookamrksProvaConfiguration configuration,
                     final Environment environment) {
     	final UserDao userDao = new UserDao(hibernateBundle.getSessionFactory());
-    	environment.jersey().register(new HelloResources()); //permette l'accesso al metodo HelloResources tramite chiamata http
-    	environment.jersey().register(AuthFactory.binder(new BasicAuthFactory<>(new HelloAuthentication(userDao), "SECURITY", User.class)));
-    	
-    
+    	environment.jersey().register(new UserResources()); //permette l'accesso al metodo HelloResources tramite chiamata http
+    	environment.jersey().register(AuthFactory.binder(new BasicAuthFactory<>(new UserAuthentication(userDao), "SECURITY", User.class)));
     }
 
 }

@@ -17,10 +17,17 @@ public class UserResources {
 	 * @DELETE
 	 * @PUT
 	 */
+	
+	/* @UnitOfWork -> annotazione che gestisce la richiesta di accesso di un metodo al db. Questa annotazione
+	 * aprirà automaticamente una sessione, inizierà una transazione, chiamerà il metodo  al suo interno, eseguirà
+	 * il commit della transazione e chiuderà la sessione. Se viene generata un'eccezione la transazione viene 
+	 * annullata.
+	 */
+	
 	@GET
 	@Produces(MediaType.TEXT_PLAIN)
 	@Path("security")
-	@UnitOfWork //TODO VEDERE QUESTA ANNOTATION
+	@UnitOfWork 
 	public String greetSecurity(@Auth User user) {
 		return "Hello world security";
 	}
