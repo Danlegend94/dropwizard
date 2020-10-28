@@ -57,7 +57,7 @@ public class DropBookamrksProvaApplication extends Application<DropBookamrksProv
     public void run(final DropBookamrksProvaConfiguration configuration,
                     final Environment environment) {
     	final UserDao userDao = new UserDao(hibernateBundle.getSessionFactory());
-    	environment.jersey().register(new UserResources()); //permette l'accesso al metodo HelloResources tramite chiamata http
+    	environment.jersey().register(new UserResources(userDao));
     	environment.jersey().register(AuthFactory.binder(new BasicAuthFactory<>(new UserAuthentication(userDao), "SECURITY", User.class)));
     }
 

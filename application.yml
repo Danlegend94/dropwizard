@@ -1,5 +1,3 @@
-password: password
-
 server:
     applicationConnectors:
         - type: http

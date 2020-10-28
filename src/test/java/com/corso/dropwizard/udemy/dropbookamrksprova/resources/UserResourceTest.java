@@ -34,7 +34,7 @@ public class UserResourceTest {
 	@ClassRule
 	public static final ResourceTestRule RULE = new ResourceTestRule.Builder()
 			.addProvider(AuthFactory.binder(new BasicAuthFactory<>(SECURITYRULE, "Security", User.class)))
-			.addResource(new UserResources())
+			//.addResource(new UserResources())
 			.setTestContainerFactory(new GrizzlyWebTestContainerFactory())
 			.build();
 

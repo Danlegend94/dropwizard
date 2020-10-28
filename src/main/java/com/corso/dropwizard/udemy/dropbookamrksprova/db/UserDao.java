@@ -19,9 +19,17 @@ public class UserDao extends AbstractDAO<User>{
 	
 	
 	public Optional<User> findByUsernameAndPassword(String username, String password){
-		return Optional.fromNullable(uniqueResult(namedQuery("User.findByUsernameAndPassword")
+		
+		Optional<User> response = Optional.fromNullable(uniqueResult(namedQuery("User.findByUsernameAndPassword")
 				.setParameter("username", username)
-				.setParameter("password", password)));
+				.setParameter("password", password)
+				));
+			
+			if(!response.isPresent()) {
+				return Optional.absent();
+			}
+			
+			return response;
 	}
 
 }
