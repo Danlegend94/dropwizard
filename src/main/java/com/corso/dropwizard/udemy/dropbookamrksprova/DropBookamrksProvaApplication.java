@@ -1,8 +1,11 @@
 package com.corso.dropwizard.udemy.dropbookamrksprova;
 
 import com.corso.dropwizard.udemy.dropbookamrksprova.auth.UserAuthentication;
+import com.corso.dropwizard.udemy.dropbookamrksprova.core.Bookmark;
 import com.corso.dropwizard.udemy.dropbookamrksprova.core.User;
+import com.corso.dropwizard.udemy.dropbookamrksprova.db.BookMarkDao;
 import com.corso.dropwizard.udemy.dropbookamrksprova.db.UserDao;
+import com.corso.dropwizard.udemy.dropbookamrksprova.resources.BookmarkResources;
 import com.corso.dropwizard.udemy.dropbookamrksprova.resources.UserResources;
 import io.dropwizard.Application;
 import io.dropwizard.auth.AuthFactory;
@@ -16,7 +19,7 @@ import io.dropwizard.setup.Environment;
 public class DropBookamrksProvaApplication extends Application<DropBookamrksProvaConfiguration> {
 	
 	final HibernateBundle<DropBookamrksProvaConfiguration> hibernateBundle = 
-			new HibernateBundle<DropBookamrksProvaConfiguration>(User.class) {
+			new HibernateBundle<DropBookamrksProvaConfiguration>(User.class, Bookmark.class) {
 
 				@Override
 				public DataSourceFactory getDataSourceFactory(DropBookamrksProvaConfiguration configuration) {
@@ -56,9 +59,11 @@ public class DropBookamrksProvaApplication extends Application<DropBookamrksProv
     @Override
     public void run(final DropBookamrksProvaConfiguration configuration,
                     final Environment environment) {
+    	final BookMarkDao bookMarkDao = new BookMarkDao(hibernateBundle.getSessionFactory());
     	final UserDao userDao = new UserDao(hibernateBundle.getSessionFactory());
     	environment.jersey().register(new UserResources(userDao));
     	environment.jersey().register(AuthFactory.binder(new BasicAuthFactory<>(new UserAuthentication(userDao), "SECURITY", User.class)));
+    	environment.jersey().register(new BookmarkResources(bookMarkDao));
     }
 
 }

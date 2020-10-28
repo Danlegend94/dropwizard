@@ -37,10 +37,12 @@ Class-Path: dropwizard-core-0.8.2.jar dropwizard-util-0.8.2.jar jackso
  nnotations-4.0.4.Final.jar hibernate-jpa-2.1-api-1.0.0.Final.jar java
  ssist-3.18.1-GA.jar antlr-2.7.7.jar jandex-1.1.0.Final.jar dropwizard
  -migrations-0.8.2.jar liquibase-core-3.3.2.jar liquibase-slf4j-1.2.1.
- jar postgresql-42.2.18.jar checker-qual-3.5.0.jar lombok-1.18.16.jar 
- jersey-container-servlet-core-2.19.jar javax.servlet-api-3.0.1.jar ja
- vax.inject-2.4.0-b25.jar jersey-common-2.19.jar jersey-guava-2.19.jar
-  osgi-resource-locator-1.0.1.jar javax.ws.rs-api-2.0.1.jar
+ jar postgresql-42.2.18.jar checker-qual-3.5.0.jar commons-beanutils-1
+ .9.4.jar commons-logging-1.2.jar commons-collections-3.2.2.jar lombok
+ -1.18.16.jar jersey-container-servlet-core-2.19.jar javax.servlet-api
+ -3.0.1.jar javax.inject-2.4.0-b25.jar jersey-common-2.19.jar jersey-g
+ uava-2.19.jar osgi-resource-locator-1.0.1.jar javax.ws.rs-api-2.0.1.j
+ ar
 Build-Jdk: 1.8.0_241
 Created-By: Maven Integration for Eclipse
 Main-Class: com.corso.dropwizard.udemy.dropbookamrksprova.DropBookamrk

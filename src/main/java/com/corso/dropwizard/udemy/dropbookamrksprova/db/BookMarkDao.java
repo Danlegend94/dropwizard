@@ -1,10 +1,14 @@
 package com.corso.dropwizard.udemy.dropbookamrksprova.db;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
-import java.util.Optional;
+import org.apache.commons.beanutils.BeanUtils;
 import org.hibernate.SessionFactory;
 import com.corso.dropwizard.udemy.dropbookamrksprova.core.Bookmark;
+import com.google.common.base.Optional;
+
 import io.dropwizard.hibernate.AbstractDAO;
+import io.dropwizard.jersey.params.LongParam;
 
 public class BookMarkDao extends AbstractDAO<Bookmark>{
 
@@ -12,30 +16,42 @@ public class BookMarkDao extends AbstractDAO<Bookmark>{
 		super(sessionFactory);
 	}
 	
-	public List<Bookmark> findByUserId(Long id) {
-        return list(namedQuery("Bookmark.findByUserId")
-                .setParameter("id", id));
-    }
-
-    public Optional<Bookmark> findById(Long id) {
-        return Optional.ofNullable(get(id));
-    }
-
-    
-    public Optional<Bookmark> findByIdAndUserId(Long id, Long userId) {
-        return Optional.ofNullable(uniqueResult(namedQuery("Bookmark.findByIdAndUserId")
-                        .setParameter("id", id)
-                        .setParameter("userId", userId)));
-        }
-   
-    public Bookmark save(Bookmark bookmark) {
+	public Bookmark save(Bookmark bookmark) {
         return persist(bookmark);
     }
-
-    public void delete(Integer id) {
-        namedQuery("Bookmark.remove")
-                .setParameter("id", id)
-                .executeUpdate();
+	
+	public Optional<Bookmark> findById(LongParam id) {
+		Optional<Bookmark> bookmark = Optional.fromNullable(uniqueResult(namedQuery("Bookmark.findById")));
+		if(bookmark == null) {
+			Optional.absent();
+		}
+		return bookmark;
+	}
+	
+	
+	
+	public List<Bookmark> findAll(){
+		return list(namedQuery("Bookmark.findAll"));
+	}
+	
+	public Bookmark update(Bookmark bookmark, LongParam id) {
+        Optional<Bookmark> exists = findById(id);
+		
+		try {
+			BeanUtils.copyProperties(bookmark, exists.get());
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			e.printStackTrace();
+		}
+		return persist(bookmark);
     }
+	
+	public void delete(LongParam id) {
+		namedQuery("Bookmark.remove")
+        .setParameter("id", id)
+        .executeUpdate();
+	}
 
+	
 }
