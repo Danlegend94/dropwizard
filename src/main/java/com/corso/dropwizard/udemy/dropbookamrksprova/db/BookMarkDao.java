@@ -21,7 +21,8 @@ public class BookMarkDao extends AbstractDAO<Bookmark>{
     }
 	
 	public Optional<Bookmark> findById(LongParam id) {
-		Optional<Bookmark> bookmark = Optional.fromNullable(uniqueResult(namedQuery("Bookmark.findById")));
+		Optional<Bookmark> bookmark = Optional.fromNullable(uniqueResult(namedQuery("Bookmark.findById")
+				.setParameter("id", id.get())));
 		if(bookmark == null) {
 			Optional.absent();
 		}
