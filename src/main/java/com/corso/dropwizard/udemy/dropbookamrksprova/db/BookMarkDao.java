@@ -24,7 +24,7 @@ public class BookMarkDao extends AbstractDAO<Bookmark>{
 		Optional<Bookmark> bookmark = Optional.fromNullable(uniqueResult(namedQuery("Bookmark.findById")
 				.setParameter("id", id.get())));
 		if(bookmark == null) {
-			Optional.absent();
+			return Optional.absent();
 		}
 		return bookmark;
 	}
@@ -37,15 +37,9 @@ public class BookMarkDao extends AbstractDAO<Bookmark>{
 	
 	public Bookmark update(Bookmark bookmark, LongParam id) {
         Optional<Bookmark> exists = findById(id);
-		
-		try {
-			BeanUtils.copyProperties(bookmark, exists.get());
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			e.printStackTrace();
-		}
-		return persist(bookmark);
+		exists.get().setDescription(bookmark.getDescription());
+		exists.get().setUrl(bookmark.getUrl());
+		return persist(exists.get());
     }
 	
 	public void delete(LongParam id) {
