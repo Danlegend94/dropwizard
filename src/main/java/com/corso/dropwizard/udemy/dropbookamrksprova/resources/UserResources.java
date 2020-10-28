@@ -58,7 +58,7 @@ public class UserResources {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("prova")
-	public Optional<User> findByUsernameAndPassword(User user){
+	public Optional<User> findByUsernameAndPassword(@Auth User userAuth, User user){
 		return userDao.findByUsernameAndPassword(user.getUsername(), user.getPassword());
 	}
 	
