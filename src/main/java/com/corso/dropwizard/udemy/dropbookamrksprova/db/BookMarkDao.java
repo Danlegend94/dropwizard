@@ -1,12 +1,11 @@
 package com.corso.dropwizard.udemy.dropbookamrksprova.db;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.List;
-import org.apache.commons.beanutils.BeanUtils;
+
 import org.hibernate.SessionFactory;
+
 import com.corso.dropwizard.udemy.dropbookamrksprova.core.Bookmark;
 import com.google.common.base.Optional;
-
 import io.dropwizard.hibernate.AbstractDAO;
 import io.dropwizard.jersey.params.LongParam;
 
