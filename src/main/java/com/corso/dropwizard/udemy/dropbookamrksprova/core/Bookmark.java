@@ -1,6 +1,8 @@
 package com.corso.dropwizard.udemy.dropbookamrksprova.core;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,12 +19,10 @@ import lombok.Data;
 @Table(name = "bookmarks")
 @Data
 @NamedQueries({
-    @NamedQuery(name = "Bookmark.findAll",
-            query = "SELECT b FROM Bookmark b"),
-    @NamedQuery(name = "Bookmark.findById",
-            query = "SELECT b FROM Bookmark b WHERE b.id = :id"),
-    @NamedQuery(name = "Bookmark.remove", query = "DELETE FROM Bookmark b "
-            + "where b.id = :id")})
+    @NamedQuery(name = "Bookmark.findAll", query = "SELECT b FROM Bookmark b"),
+    @NamedQuery(name = "Bookmark.findById", query = "SELECT b FROM Bookmark b WHERE b.id = :id"),
+    @NamedQuery(name = "Bookmark.remove", query = "DELETE FROM Bookmark b where b.id = :id")})
+
 public class Bookmark {
 	
 	@Id

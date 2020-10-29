@@ -15,6 +15,12 @@
             <column name="password" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="lastname" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
     </changeSet>
     
@@ -44,11 +50,15 @@
             <column name="id" value="1"/>
             <column name="username" value="admin"/>
             <column name="password" value="admin"/>
+            <column name="name" value="admin"/>
+            <column name="lastname" value="admin"/>
         </insert>
         <insert tableName="users">
             <column name="id" value="2"/>
             <column name="username" value="admin2"/>
             <column name="password" value="admin2"/>
+            <column name="name" value="admin2"/>
+            <column name="lastname" value="admin2"/>
         </insert>
         <rollback>
             <delete tableName="users">

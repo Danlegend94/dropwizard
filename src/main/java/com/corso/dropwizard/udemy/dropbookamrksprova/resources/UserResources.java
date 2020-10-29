@@ -3,27 +3,22 @@ package com.corso.dropwizard.udemy.dropbookamrksprova.resources;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import com.corso.dropwizard.udemy.dropbookamrksprova.core.User;
-import com.corso.dropwizard.udemy.dropbookamrksprova.db.UserDao;
-import com.google.common.base.Optional;
-
+import com.corso.dropwizard.udemy.dropbookamrksprova.db.impl.UserDaoServiceImpl;
 import io.dropwizard.auth.Auth;
 import io.dropwizard.hibernate.UnitOfWork;
 
-@Path("/user") //utilizzato come request mapping
+
+@Path("/user")
 public class UserResources {
-	
-	/* HTTP REQUEST
-	 * @GET
-	 * @POST
-	 * @DELETE
-	 * @PUT
-	 */
+
 	
 	/* @UnitOfWork -> annotazione che gestisce la richiesta di accesso di un metodo al db. Questa annotazione
 	 * aprirà automaticamente una sessione, inizierà una transazione, chiamerà il metodo  al suo interno, eseguirà
@@ -33,21 +28,29 @@ public class UserResources {
 	
 	public UserResources() {}
 	
-	private UserDao userDao;
+	private UserDaoServiceImpl userDao;
 	
-	public UserResources(UserDao userDao) {
+	public UserResources(UserDaoServiceImpl userDao) {
 		this.userDao = userDao;
 	}
 	
 	@GET
 	@Produces(MediaType.TEXT_PLAIN)
-	@Path("security")
+	@Path("authentication")
 	@UnitOfWork 
-	public String greetSecurity(@Auth User user) {
-		return "Accesso eseguito correttamente";
+	public User authentication(@Auth User user) {
+		return user;
 	}
 	
-	@GET()
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	@UnitOfWork
+	public User save(User user) {
+		return userDao.save(user);
+	}
+	
+	@GET
 	@UnitOfWork
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("all")
@@ -55,11 +58,20 @@ public class UserResources {
 		return userDao.findAll();
 	}
 	
-	@GET
-	@UnitOfWork
-	@Produces(MediaType.APPLICATION_JSON)
+	//FUNZIONA anche se da 500
+	@PUT
+	@Produces(MediaType.TEXT_PLAIN)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Optional<User> findByUsernameAndPassword(@Auth User userAuth, User user){
-		return userDao.findByUsernameAndPassword(user.getUsername(), user.getPassword());
+	@UnitOfWork 
+	public User update(@Auth User user, User updateUser) {
+		return userDao.update(user, updateUser);
 	}
+	
+	//ERRORE PER ELIMINAZIONE IN CASCATA DA VERIFICARE
+	@DELETE
+	@UnitOfWork
+	public void delete(@Auth User user) {
+		userDao.delete(user.getId());
+	}
+	
 }
