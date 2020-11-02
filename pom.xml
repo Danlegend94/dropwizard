@@ -93,6 +93,12 @@
 			<version>${jersey.version}</version>
 			<scope>test</scope>
 		</dependency>
+		
+		<dependency>
+            <groupId>com.hubspot.dropwizard</groupId>
+            <artifactId>dropwizard-guice</artifactId>
+            <version>1.0.6.0</version>
+        </dependency>
 
 
 	</dependencies>
