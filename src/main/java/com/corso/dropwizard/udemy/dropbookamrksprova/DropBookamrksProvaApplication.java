@@ -16,7 +16,16 @@ import io.dropwizard.migrations.MigrationsBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 
+/*TODO
+ 1) verificare come passare tutto il package e non le classi singole in new HibernateBundle
+ 2) scaricare dipendenze per guice
+ 3) verificare configurazioni per passare al bundle le inject
+ 4) verificare se il file migration sia possibile dividerlo in più parti
+*/
+
+
 public class DropBookamrksProvaApplication extends Application<DropBookamrksProvaConfiguration> {
+	
 	
 	final HibernateBundle<DropBookamrksProvaConfiguration> hibernateBundle = 
 			new HibernateBundle<DropBookamrksProvaConfiguration>(User.class, Bookmark.class) {
